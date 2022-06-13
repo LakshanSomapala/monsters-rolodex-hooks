@@ -5,7 +5,7 @@ import CardList from './component/card-list/card-list.component'
 import SearchBox from './component/search-box/search-box.component'
 import './App.css';
 
-class App extends Component { //sadasdasdad
+class App extends Component { //sadasdasdadwssa
   constructor() {
     super();
 
