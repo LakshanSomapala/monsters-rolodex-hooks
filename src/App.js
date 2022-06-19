@@ -8,17 +8,20 @@ import './App.css';
 const App = () => {
   const [searchField, setSearchField] = useState('') // [value, setValue], string variabel
   const [monsters, setMonsters] = useState([]); // array variable
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
 
-  console.log('render');
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then((response) => response.json())
       .then((users) => setMonsters(users));
-  }, [])
+  }, []) // this fetch will fired only when component mount (initial state of the program) because of empty array which means no dependancis to be change to re-render this hook.
 
-  const filteredMonsters = monsters.filter((monster) => {
-    return monster.name.toLocaleLowerCase().includes(searchField);
-  });
+  useEffect(() => {
+    const newFileteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
+    });
+    setFilteredMonsters(newFileteredMonsters);
+  }, [monsters, searchField]) // this hook will call every time when monsters or searchField value changes.
 
   const onSearchChange = (event) => {
     const searchFieldString = event.target.value.toLocaleLowerCase();
@@ -33,7 +36,7 @@ const App = () => {
         placeHolder='search monsters'
         onChangeHandler={onSearchChange}
       ></SearchBox>
-      {/* <CardList monsters={filteredMonsters}></CardList> */}
+      <CardList monsters={filteredMonsters}></CardList>
     </div>
   )
 };

@@ -1,21 +1,14 @@
-import { Component } from "react";
-
 import Card from "../card/card.component";
 import './card-list.styles.css'
 
-class CardList extends Component {
-    render() {
-        const { monsters } = this.props;
-        return (
-            <div className='card-list'>
-                {monsters.map((monster) => {
-                    return (
-                        <Card monsters = {monster}></Card>
-                    )
-                })}
-            </div>
-        )
-    }
-}
+const CardList = ({ monsters }) => ( // no need to de-structuring parameters as we pass only oine parameter, no return we implicitly return coz nothing else to return
+    <div className='card-list'>
+        {monsters.map((monster) => {
+            return (
+                <Card monsters={monster}></Card>
+            )
+        })}
+    </div>
+)
 
 export default CardList;
